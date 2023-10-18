@@ -43,8 +43,6 @@ function MealList({navigation, route}: {navigation: any; route: any}) {
 
   return (
     <View>
-      <Text>MealList</Text>
-
       <FlatList
         style={{backgroundColor: '#f0f0f0', padding: 10}}
         data={meals}
