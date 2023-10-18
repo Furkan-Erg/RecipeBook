@@ -1,24 +1,21 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import {Category} from '../pages/Home';
 import {Meal} from '../pages/MealList';
 
-function Card({navigation, category}: {navigation: any; category: Category}) {
-  const {idCategory, strCategory, strCategoryDescription, strCategoryThumb} =
-    category;
+function MealCard({navigation, meal}: {navigation: any; meal: Meal}) {
+  const {strMeal, strMealThumb, idMeal} = meal;
 
-  const goToMealList = () => {
-    navigation.push('MealList', {strCategory});
+  const goToMealDetail = () => {
+    navigation.push('Details', {idMeal});
   };
 
   return (
-    <TouchableOpacity onPress={goToMealList}>
+    <TouchableOpacity onPress={goToMealDetail}>
       <View style={styles.cardContainer}>
-        <Image source={{uri: strCategoryThumb}} style={styles.cardImage} />
+        <Image source={{uri: strMealThumb}} style={styles.cardImage} />
         <View>
-          <Text style={styles.categoryName}>{strCategory}</Text>
           <Text numberOfLines={3} style={styles.categoryDescription}>
-            {strCategoryDescription}
+            {strMeal}
           </Text>
         </View>
       </View>
@@ -57,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card;
+export default MealCard;

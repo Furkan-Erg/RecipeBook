@@ -11,7 +11,7 @@ export interface Category {
   strCategoryThumb: string;
   strCategoryDescription: string;
 }
-function Home(): JSX.Element {
+function Home({navigation}: any): JSX.Element {
   const [categories, setCategories] = React.useState<Category[]>([]);
   const getCategories = useCallback(async () => {
     await axios
@@ -42,10 +42,9 @@ function Home(): JSX.Element {
 
   return (
     <FlatList
-      persistentScrollbar={true}
       style={{backgroundColor: '#f0f0f0', padding: 10}}
       data={categories}
-      renderItem={({item}) => <Card category={item} />}
+      renderItem={({item}) => <Card navigation={navigation} category={item} />}
       keyExtractor={item => item.idCategory}></FlatList>
   );
 }
