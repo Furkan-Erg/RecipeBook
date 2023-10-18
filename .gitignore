@@ -65,3 +65,12 @@ yarn-error.log
 # testing
 /coverage
 package-lock.json
+android/app/src/main/res/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backiconmask.png
+android/app/src/main/res/drawable-mdpi/node_modules_reactnative_libraries_newappscreen_components_logo.png
+android/app/src/main/res/drawable-xhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png
+.gitignore
+android/app/src/main/res/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backicon.png
+android/app/src/main/res/drawable-xxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png
+android/app/src/main/res/drawable-xxxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png
+android/app/src/main/res/drawable-hdpi/node_modules_reactnavigation_elements_src_assets_backicon.png
+android/app/src/main/assets/index.android.bundle
