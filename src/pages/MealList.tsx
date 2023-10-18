@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import axios from 'axios';
 import MealCard from '../components/MealCard';
@@ -42,18 +42,24 @@ function MealList({navigation, route}: {navigation: any; route: any}) {
   }, [getMealList]);
 
   return (
-    <View>
-      <FlatList
-        style={{backgroundColor: '#f0f0f0', padding: 10}}
-        data={meals}
-        renderItem={({item}) => (
-          <MealCard meal={item} navigation={navigation} />
-        )}
-        keyExtractor={item => item.idMeal}></FlatList>
-    </View>
+    <ScrollView>
+      <View style={styles.row}>
+        {meals.map((meal: Meal) => (
+          <View key={meal.idMeal}>
+            <MealCard navigation={navigation} meal={meal}></MealCard>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
 export default MealList;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+});

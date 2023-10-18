@@ -13,8 +13,8 @@ function MealCard({navigation, meal}: {navigation: any; meal: Meal}) {
     <TouchableOpacity onPress={goToMealDetail}>
       <View style={styles.cardContainer}>
         <Image source={{uri: strMealThumb}} style={styles.cardImage} />
-        <View>
-          <Text numberOfLines={3} style={styles.categoryDescription}>
+        <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+          <Text numberOfLines={2} style={styles.title}>
             {strMeal}
           </Text>
         </View>
@@ -34,23 +34,21 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     margin: 10,
     marginBottom: 20,
+    width: 175,
+    height: 180,
   },
   cardImage: {
-    width: '100%',
-    height: 200,
+    width: 175,
+    height: 140,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
   },
 
-  categoryDescription: {
-    fontSize: 18,
-    margin: 10,
-  },
-
-  categoryName: {
-    margin: 10,
-    fontSize: 25,
+  title: {
+    fontSize: 15,
     fontWeight: 'bold',
+    color: '#000',
+    marginHorizontal: 10,
   },
 });
 

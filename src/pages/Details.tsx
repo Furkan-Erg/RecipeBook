@@ -1,12 +1,4 @@
-import {
-  Button,
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import axios from 'axios';
 
@@ -99,7 +91,7 @@ const Details = ({route}: {route: any}) => {
           <Text style={styles.instructions}>
             Instructions: {detail.strInstructions}
           </Text>
-          <Text>Country: {detail.strArea}</Text>
+          <Text style={styles.description}>Country: {detail.strArea}</Text>
           {Array.from({length: 20}).map((_, index) => {
             const ingredient = detail[`strIngredient${index + 1}`];
             const measure = detail[`strMeasure${index + 1}`];
@@ -128,8 +120,8 @@ const Ingredient = ({
 }) => {
   return (
     <View style={styles.row}>
-      <Text>{strIngredient}</Text>
-      <Text>{strMeasure}</Text>
+      <Text style={styles.description}>{strIngredient}</Text>
+      <Text style={styles.description}>{strMeasure}</Text>
     </View>
   );
 };
@@ -162,6 +154,10 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 10,
     alignSelf: 'center',
+    color: '#333',
+  },
+  description: {
+    fontSize: 15,
     color: '#333',
   },
   img: {
