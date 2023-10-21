@@ -1,19 +1,18 @@
 import React from 'react';
 import {StyleSheet, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Food from './src/pages/Food';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Details from './src/pages/Details';
 import MealList from './src/pages/MealList';
 import Home from './src/pages/Home';
 import Drink from './src/pages/Drink';
-
+import * as ColorScheme from './src/styles/ColorScheme';
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: ColorScheme.primaryColor,
   };
   const Stack = createNativeStackNavigator();
   return (
@@ -28,24 +27,4 @@ function App(): JSX.Element {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
 export default App;

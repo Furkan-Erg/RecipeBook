@@ -51,7 +51,7 @@ function Card({
       ) : (
         <View>
           <View style={styles.icon}>
-            <Text style={{fontSize: 30, color: '#333'}}>
+            <Text style={{fontSize: 50, color: '#333'}}>
               {categoryIcon?.icon}
             </Text>
             <Text style={styles.title}>{strCategory}</Text>
