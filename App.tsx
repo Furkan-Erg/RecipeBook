@@ -12,7 +12,7 @@ function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: ColorScheme.primaryColor,
+    backgroundColor: ColorScheme.secondaryColor,
   };
   const Stack = createNativeStackNavigator();
   return (

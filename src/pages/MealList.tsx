@@ -2,6 +2,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import axios from 'axios';
 import MealCard from '../components/MealCard';
+import Spinner from '../components/Spinner';
 
 export interface MealList {
   meals: Meal[];
@@ -16,7 +17,7 @@ export interface Meal {
 function MealList({navigation, route}: {navigation: any; route: any}) {
   const {strCategory} = route.params;
 
-  const [meals, setMeals] = React.useState<Meal[]>([]);
+  const [meals, setMeals] = React.useState<Meal[]>();
   const getMealList = useCallback(async () => {
     await axios
       .get(
@@ -41,7 +42,9 @@ function MealList({navigation, route}: {navigation: any; route: any}) {
     getMealList();
   }, [getMealList]);
 
-  return (
+  return !meals ? (
+    <Spinner />
+  ) : (
     <ScrollView>
       <View style={styles.row}>
         {meals.map((meal: Meal) => (

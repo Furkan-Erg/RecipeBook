@@ -1,6 +1,7 @@
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import axios from 'axios';
+import Spinner from '../components/Spinner';
 
 export interface Details {
   meals: Meal[];
@@ -64,7 +65,7 @@ export interface Meal {
 
 const Details = ({route}: {route: any}) => {
   const {idMeal} = route.params;
-  const [details, setDetails] = React.useState<Meal[]>([]);
+  const [details, setDetails] = React.useState<Meal[]>();
 
   const getDetails = useCallback(async () => {
     await axios
@@ -82,7 +83,9 @@ const Details = ({route}: {route: any}) => {
     getDetails();
   }, [getDetails]);
 
-  return (
+  return !details ? (
+    <Spinner />
+  ) : (
     <ScrollView style={styles.container}>
       {details.map((detail: any) => (
         <View key={detail.idMeal}>

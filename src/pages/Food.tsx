@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   ScrollView,
   StyleSheet,
   Switch,
@@ -12,6 +13,7 @@ import Card from '../components/Card';
 import MealCard from '../components/MealCard';
 import {Meal} from './MealList';
 import * as ColorScheme from '../styles/ColorScheme';
+import Spinner from '../components/Spinner';
 export interface Categories {
   categories: Category[];
 }
@@ -55,7 +57,6 @@ function Food({navigation}: any): JSX.Element {
     setIsDetailed(!isDetailed);
   };
   const [randomMeals, setRandomMeals] = React.useState<Meal[]>();
-  const [isRandomMeal, setIsRandomMeal] = React.useState(false);
 
   const getRandomMeals = useCallback(async () => {
     const tempRandomMeals: Meal[] = [];
@@ -81,23 +82,22 @@ function Food({navigation}: any): JSX.Element {
         });
     }
     setRandomMeals(tempRandomMeals);
-    setIsRandomMeal(true);
   }, []);
   useEffect(() => {
     getRandomMeals();
   }, [getRandomMeals]);
 
-  return (
+  return !randomMeals ? (
+    <Spinner />
+  ) : (
     <ScrollView>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={styles.row}>
-          {isRandomMeal
-            ? randomMeals?.map((meal: Meal) => (
-                <View key={meal.idMeal}>
-                  <MealCard navigation={navigation} meal={meal}></MealCard>
-                </View>
-              ))
-            : null}
+          {randomMeals?.map((meal: Meal) => (
+            <View key={meal.idMeal}>
+              <MealCard navigation={navigation} meal={meal}></MealCard>
+            </View>
+          ))}
         </View>
         <TouchableOpacity style={styles.button} onPress={getRandomMeals}>
           <Text style={{color: 'white', fontSize: 20, fontWeight: '800'}}>
@@ -116,8 +116,13 @@ function Food({navigation}: any): JSX.Element {
           </Text>
           <Switch
             style={{transform: [{scaleX: 1.5}, {scaleY: 1.5}]}}
-            trackColor={{false: '#767577', true: '#81b0ff'}}
-            thumbColor={isDetailed ? '#22aaaf' : '#f4f3f4'}
+            trackColor={{
+              false: ColorScheme.lightPrimary,
+              true: ColorScheme.lightSecondary,
+            }}
+            thumbColor={
+              isDetailed ? ColorScheme.secondaryColor : ColorScheme.primaryColor
+            }
             value={isDetailed}
             onValueChange={toggleDetailed}
           />
@@ -152,7 +157,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    backgroundColor: ColorScheme.secondaryColor,
+    backgroundColor: ColorScheme.primaryColor,
     padding: 10,
     margin: 10,
     borderRadius: 10,
