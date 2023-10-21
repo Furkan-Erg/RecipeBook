@@ -34,11 +34,11 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     margin: 10,
     marginBottom: 20,
-    width: 175,
+    width: 150,
     height: 180,
   },
   cardImage: {
-    width: 175,
+    width: 150,
     height: 140,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
