@@ -1,8 +1,17 @@
+#Important Notes
+**Note**: HIGH LEVEL EXPERIENCE NEEDED there is a carousel package in project and it is import viewproptypes from react , and its cause a trouble :D therefore you should change every import which related to carousel package as deprecated version. (Turkish) arkadaşlar başımıza büyük bela aldık sırf böyle sağdan sola kaydırma eklemek için bu paketlerin bağımlı olduğu bütün paketlerde viewproptypes importunun kaynağını değiştirmeniz lazım aşağıda bulabilirsiniz. yeni başladıysanız geçmiş olsun yardım diye bağırın bir senior belki yardım eder.
+
+## New Import
+
+```tsx
+import {ViewPropTypes} from 'deprecated-react-native-prop-types';
+```
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
 ## Step 1: Start the Metro Server
 

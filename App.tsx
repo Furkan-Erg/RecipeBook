@@ -8,6 +8,7 @@ import MealList from './src/pages/MealList';
 import Home from './src/pages/Home';
 import Drink from './src/pages/Drink';
 import * as ColorScheme from './src/styles/ColorScheme';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -16,15 +17,17 @@ function App(): JSX.Element {
   };
   const Stack = createNativeStackNavigator();
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Foods" component={Food} />
-        <Stack.Screen name="Beverages" component={Drink} />
-        <Stack.Screen name="Details" component={Details} />
-        <Stack.Screen name="MealList" component={MealList} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Foods" component={Food} />
+          <Stack.Screen name="Beverages" component={Drink} />
+          <Stack.Screen name="Details" component={Details} />
+          <Stack.Screen name="MealList" component={MealList} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 export default App;

@@ -1,5 +1,5 @@
 import {ScrollView, StyleSheet, View} from 'react-native';
-import React, {useCallback, useEffect} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import axios from 'axios';
 import MealCard from '../components/MealCard';
 import Spinner from '../components/Spinner';
@@ -17,7 +17,7 @@ export interface Meal {
 function MealList({navigation, route}: {navigation: any; route: any}) {
   const {strCategory} = route.params;
 
-  const [meals, setMeals] = React.useState<Meal[]>();
+  const [meals, setMeals] = useState<Meal[]>();
   const getMealList = useCallback(async () => {
     await axios
       .get(

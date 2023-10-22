@@ -1,19 +1,22 @@
 import {
-  ActivityIndicator,
   ScrollView,
   StyleSheet,
   Switch,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import axios from 'axios';
 import Card from '../components/Card';
 import MealCard from '../components/MealCard';
 import {Meal} from './MealList';
 import * as ColorScheme from '../styles/ColorScheme';
 import Spinner from '../components/Spinner';
+import _, {set} from 'lodash';
+import MealCarousel from '../components/MealCaurosel';
+import {Divider, LinearProgress} from '@rneui/base';
 export interface Categories {
   categories: Category[];
 }
@@ -24,7 +27,7 @@ export interface Category {
   strCategoryDescription: string;
 }
 function Food({navigation}: any): JSX.Element {
-  const [categories, setCategories] = React.useState<Category[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const getCategories = useCallback(async () => {
     await axios
       .get('https://www.themealdb.com/api/json/v1/1/categories.php', {
@@ -52,11 +55,11 @@ function Food({navigation}: any): JSX.Element {
     getCategories();
   }, [getCategories]);
 
-  const [isDetailed, setIsDetailed] = React.useState(false);
+  const [isDetailed, setIsDetailed] = useState(false);
   const toggleDetailed = () => {
     setIsDetailed(!isDetailed);
   };
-  const [randomMeals, setRandomMeals] = React.useState<Meal[]>();
+  const [randomMeals, setRandomMeals] = useState<Meal[]>();
 
   const getRandomMeals = useCallback(async () => {
     const tempRandomMeals: Meal[] = [];
@@ -86,11 +89,62 @@ function Food({navigation}: any): JSX.Element {
   useEffect(() => {
     getRandomMeals();
   }, [getRandomMeals]);
+  const [searchResults, setSearchResults] = useState<Meal[]>([]);
+
+  const searchFood = useCallback(async (text: string) => {
+    if (text === '') {
+      setSearchResults([]);
+      return;
+    }
+    await axios
+      .get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(response => {
+        const searchResponse = response.data.meals.map((meal: Meal) => {
+          return meal;
+        });
+        setSearchResults(searchResponse);
+      })
+      .catch(function (error) {
+        console.log(
+          'There has been a problem with your fetch operation: ' +
+            error.message,
+        );
+      });
+  }, []);
+  const debouncedAPICall = _.debounce(searchFood, 300);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const handleInputChange = (text: string) => {
+    setSearchTerm(text);
+    debouncedAPICall(text);
+  };
 
   return !randomMeals ? (
     <Spinner />
   ) : (
     <ScrollView>
+      <View style={styles.column}>
+        <TextInput
+          style={styles.search}
+          placeholder="Search"
+          onChangeText={handleInputChange}
+          value={searchTerm}
+          placeholderTextColor="white"
+        />
+        {searchResults.length > 0 ? (
+          <MealCarousel
+            mealList={searchResults}
+            navigation={navigation}></MealCarousel>
+        ) : null}
+      </View>
+      <LinearProgress
+        color={ColorScheme.primaryColor}
+        value={100}></LinearProgress>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={styles.row}>
           {randomMeals?.map((meal: Meal) => (
@@ -105,6 +159,9 @@ function Food({navigation}: any): JSX.Element {
           </Text>
         </TouchableOpacity>
 
+        <LinearProgress
+          color={ColorScheme.primaryColor}
+          value={100}></LinearProgress>
         <View
           style={{
             flex: 1,
@@ -166,5 +223,26 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 1, height: 1},
     shadowOpacity: 0.3,
     shadowRadius: 2,
+  },
+  column: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  search: {
+    height: 40,
+    width: 225,
+    margin: 12,
+    borderWidth: 3,
+    padding: 10,
+    borderRadius: 10,
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    backgroundColor: ColorScheme.lightPrimary,
+    borderColor: ColorScheme.primaryColor,
+    elevation: 3, // Android shadow
+    shadowColor: '#333', // iOS shadow
   },
 });
