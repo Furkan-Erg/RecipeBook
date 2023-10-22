@@ -6,7 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Details from './src/pages/Details';
 import MealList from './src/pages/MealList';
 import Home from './src/pages/Home';
-import Drink from './src/pages/Drink';
+import Bevarage from './src/pages/Bevarage';
 import * as ColorScheme from './src/styles/ColorScheme';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import DrinkList from './src/pages/DrinkList';
@@ -24,7 +24,7 @@ function App(): JSX.Element {
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Foods" component={Food} />
-          <Stack.Screen name="Beverages" component={Drink} />
+          <Stack.Screen name="Beverages" component={Bevarage} />
           <Stack.Screen name="Details" component={Details} />
           <Stack.Screen name="DrinkDetails" component={DrinkDetails} />
           <Stack.Screen name="MealList" component={MealList} />
