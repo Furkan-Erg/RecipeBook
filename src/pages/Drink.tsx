@@ -17,7 +17,7 @@ export interface DrinkCategory {
   strCategory: string;
 }
 
-const Drink = ({navigation}: any) => {
+const Drink = ({navigation, route}: any) => {
   const [categories, setCategories] = useState<DrinkCategory[]>([]);
   const getCategories = useCallback(async () => {
     await axios
@@ -45,12 +45,18 @@ const Drink = ({navigation}: any) => {
   useEffect(() => {
     getCategories();
   }, [getCategories]);
+  const goToDrinkList = (strCategory: string) => {
+    navigation.push('DrinkList', {strCategory: strCategory});
+  };
 
   return (
     <ScrollView>
       <View style={styles.row}>
         {categories.map((category, index) => (
-          <TouchableOpacity style={styles.cardContainer} key={index}>
+          <TouchableOpacity
+            onPress={goToDrinkList.bind(this, category.strCategory)}
+            style={styles.cardContainer}
+            key={index}>
             <Text style={styles.text}>{category.strCategory}</Text>
           </TouchableOpacity>
         ))}

@@ -9,6 +9,8 @@ import Home from './src/pages/Home';
 import Drink from './src/pages/Drink';
 import * as ColorScheme from './src/styles/ColorScheme';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import DrinkList from './src/pages/DrinkList';
+import DrinkDetails from './src/pages/DrinkDetails';
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -24,7 +26,9 @@ function App(): JSX.Element {
           <Stack.Screen name="Foods" component={Food} />
           <Stack.Screen name="Beverages" component={Drink} />
           <Stack.Screen name="Details" component={Details} />
+          <Stack.Screen name="DrinkDetails" component={DrinkDetails} />
           <Stack.Screen name="MealList" component={MealList} />
+          <Stack.Screen name="DrinkList" component={DrinkList} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
