@@ -1,4 +1,4 @@
-#Important Notes
+# Important Notes
 **Note**: HIGH LEVEL EXPERIENCE NEEDED there is a carousel package in project and it is import viewproptypes from react , and its cause a trouble :D therefore you should change every import which related to carousel package as deprecated version. (Turkish) arkadaşlar başımıza büyük bela aldık sırf böyle sağdan sola kaydırma eklemek için bu paketlerin bağımlı olduğu bütün paketlerde viewproptypes importunun kaynağını değiştirmeniz lazım aşağıda bulabilirsiniz. yeni başladıysanız geçmiş olsun yardım diye bağırın bir senior belki yardım eder.
 
 ## New Import
