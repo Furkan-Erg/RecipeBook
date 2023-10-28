@@ -1,7 +1,7 @@
 import React from 'react';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import Home from '../pages/Home';
-import {BevarageStack, FoodStack} from './Stacks';
+import {BevarageStack, FavoritesStack, FoodStack} from './Stacks';
 import * as ColorScheme from '../styles/ColorScheme';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -16,6 +16,7 @@ function Tabs() {
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Food" component={FoodStack} />
       <Tab.Screen name="Beverage" component={BevarageStack} />
+      <Tab.Screen name="Favorite" component={FavoritesStack} />
     </Tab.Navigator>
   );
 }

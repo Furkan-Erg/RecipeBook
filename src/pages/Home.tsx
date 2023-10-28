@@ -1,6 +1,5 @@
 import {Button, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import Tabs from '../components/Tabs';
 
 const Home = () => {
   return (
