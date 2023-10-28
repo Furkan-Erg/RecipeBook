@@ -85,6 +85,7 @@ const FavoritesContextProvider = ({children}: {children: any}) => {
     removeFavDrink,
     isFavMeal,
     isFavDrink,
+    favCount: get(favMeals, 'length', 0) + get(favDrinks, 'length', 0),
   };
 
   return (
