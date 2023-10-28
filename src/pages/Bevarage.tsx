@@ -195,7 +195,9 @@ const Bevarage = ({navigation, route}: any) => {
   const toggleDetailed = () => {
     setIsDetailed(!isDetailed);
   };
-  return (
+  return !randomDrinks ? (
+    <Spinner />
+  ) :(
     <ScrollView>
       <View style={styles.column}>
         <TextInput

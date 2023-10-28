@@ -1,19 +1,11 @@
 import {Button, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import Tabs from '../components/Tabs';
 
-const Home = ({navigation}: {navigation: any}) => {
-  const goToFoods = () => {
-    navigation.push('Foods');
-  };
-  const goToDrinks = () => {
-    navigation.push('Beverages');
-  };
-
+const Home = () => {
   return (
     <View>
       <Text>Home</Text>
-      <Button title="Go to Food" onPress={goToFoods} />
-      <Button title="Go to Beverages" onPress={goToDrinks} />
     </View>
   );
 };
